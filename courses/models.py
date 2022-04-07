@@ -38,4 +38,4 @@ class Evaluation(Base):
         unique_together = ["course", "email"]
 
     def __str__(self):
-        return f"{self.course} - {self.email}"
+        return f"{self.course} - {self.name}"
