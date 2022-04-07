@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cursos', '0001_initial'),
+        ('courses', '0001_initial'),
     ]
 
     operations = [
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254, verbose_name='E-mail')),
                 ('comment', models.TextField(blank=True, default='', verbose_name='Comentário')),
                 ('note', models.DecimalField(decimal_places=1, max_digits=2, verbose_name='Nota')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='evaluations', to='cursos.course', verbose_name='Curso')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='evaluations', to='courses.course', verbose_name='Curso')),
             ],
             options={
                 'verbose_name': 'Avaliação',
