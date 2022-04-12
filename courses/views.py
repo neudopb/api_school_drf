@@ -1,6 +1,4 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import generics
 from .models import (
     Course,
     Evaluation,
@@ -11,33 +9,33 @@ from .serializers import (
 )
 
 
-class CourseAPIView(APIView):
+class CoursesAPIView(generics.ListCreateAPIView):
     """
-    API Courses
+    List and Create Course API
     """
-    def get(self, request):
-        courses = Course.objects.all()
-        serializer = CourseSerializer(courses, many=True)
-        return Response(serializer.data)
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
 
-    def post(self, request):
-        serializer = CourseSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CourseAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, Update and Destroy Course API
+    """
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
 
     
-class EvaluationAPIView(APIView):
+class EvaluationsAPIView(generics.ListCreateAPIView):
     """
-    API Evaluation
+    List and Create Evaluation API
     """
-    def get(self, request):
-        evaluations = Evaluation.objects.all()
-        serializer = EvaluationSerializer(evaluations, many=True)
-        return Response(serializer.data)
+    queryset = Evaluation.objects.all()
+    serializer_class = EvaluationSerializer
 
-    def post(self, request):
-        serializer = EvaluationSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class EvaluationAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, Update and Destroy Evaluation API
+    """
+    queryset = Evaluation.objects.all()
+    serializer_class = EvaluationSerializer
