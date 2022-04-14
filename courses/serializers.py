@@ -5,19 +5,6 @@ from .models import (
 )
 
 
-class CourseSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Course
-        fields = [
-            "id",
-            "title",
-            "url",
-            "created",
-            "is_active",
-        ]
-
-
 class EvaluationSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -35,3 +22,31 @@ class EvaluationSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "email": {"write_only": True},
         }
+
+    
+class CourseSerializer(serializers.ModelSerializer):
+    # Nested Relationship
+    evaluations = EvaluationSerializer(many=True, read_only=True)
+    
+    # Primary Key Related Field
+    # evaluations = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+
+    # Hyperlinked Related Field
+    """
+    evaluations = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name="evaluation-detail"
+    )
+    """
+
+    class Meta:
+        model = Course
+        fields = [
+            "id",
+            "title",
+            "url",
+            "created",
+            "is_active",
+            "evaluations",
+        ]
