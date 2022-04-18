@@ -4,6 +4,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import (
     Course,
@@ -13,7 +14,7 @@ from .serializers import (
     CourseSerializer,
     EvaluationSerializer,
 )
-
+from .permissions import EhSuperUser
 
 """
 API V1
@@ -96,3 +97,4 @@ class CourseViewSet(viewsets.ModelViewSet):
 class EvaluationViewSet(viewsets.ModelViewSet):
     queryset = Evaluation.objects.all()
     serializer_class = EvaluationSerializer
+    permission_classes = [EhSuperUser, IsAuthenticated]
