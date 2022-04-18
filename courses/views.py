@@ -81,7 +81,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["GET"])
     def evaluations(self, request, pk=None):
-        self.pagination_class.page_size = 1
+        self.pagination_class.page_size = 2
         evaluations = Evaluation.objects.filter(course_id=pk)
         page = self.paginate_queryset(evaluations)
 
