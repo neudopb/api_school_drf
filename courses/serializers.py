@@ -23,6 +23,12 @@ class EvaluationSerializer(serializers.ModelSerializer):
             "email": {"write_only": True},
         }
 
+    def validate_note(self, value):
+        if value in range(1, 6):
+            return value
+
+        raise serializers.ValidationError("A nota precisa ser um inteiro entre 1 e 5")
+
     
 class CourseSerializer(serializers.ModelSerializer):
     # Nested Relationship
