@@ -34,7 +34,7 @@ new_evaluation = {
 # Request Evaluations
 evaluation = requests.post(url=url_base_evaluations, headers=headers, data=new_evaluation)
 
-# Test Endpoint Evaluations GET
+# Test Endpoint Evaluations POST
 assert evaluation.status_code == 201
 
 assert evaluation.json()["course"] == new_evaluation["course"]
