@@ -14,7 +14,7 @@ new_course = {
 }
 
 # Request Courses
-course = requests.post(url=url_base_courses, headers=headers,    data=new_course)
+course = requests.post(url=url_base_courses, headers=headers, data=new_course)
 
 # Test Endpoint Courses POST
 assert course.status_code == 201
